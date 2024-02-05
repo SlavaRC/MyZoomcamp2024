@@ -23,3 +23,9 @@ docker compose build
 ```bash
 git clone https://github.com/mage-ai/mage-zoomcamp.git mage-zoomcamp
 ```
+
+
+## ISSUE: 
+
+SSL: CERTIFICATE_VERIFY_FAILED
+https://jonathansoma.com/everything/python/ignoring-ssl-issues/ 
