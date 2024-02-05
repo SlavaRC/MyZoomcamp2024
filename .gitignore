@@ -39,3 +39,4 @@ Thumbs.db
 # IDEA #
 #######
 .idea
+/pg_volume_local_data/
