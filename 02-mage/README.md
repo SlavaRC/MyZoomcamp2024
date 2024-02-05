@@ -7,6 +7,11 @@ cd ./02-mage
 
 ## Step #1 
 Rename `dev.env` to simply `.env`— this will _ensure_ the file is not committed to Git by accident, since it _will_ contain credentials in the future.
+```bash
+cp dev.env .env
+```
+
+
 
 Now, let's build the container
 
