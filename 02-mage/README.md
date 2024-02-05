@@ -18,14 +18,15 @@ Now, let's build the container
 ```bash
 docker compose build
 ```
-
-## Step #2
+and start containers
 ```bash
-git clone https://github.com/mage-ai/mage-zoomcamp.git mage-zoomcamp
+docker compose up
 ```
+Go to http://localhost:6789 in your browser.
 
 
-## ISSUE: 
 
-SSL: CERTIFICATE_VERIFY_FAILED
-https://jonathansoma.com/everything/python/ignoring-ssl-issues/ 
+## ISSUE:
+SSL: CERTIFICATE_VERIFY_FAILED - 
+- https://jonathansoma.com/everything/python/ignoring-ssl-issues/
+- https://askubuntu.com/questions/1401379/certificate-verify-failed-error
