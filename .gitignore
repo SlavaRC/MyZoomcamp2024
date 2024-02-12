@@ -40,4 +40,5 @@ Thumbs.db
 #######
 .idea
 /pg_volume_local_data/
-/02-mage/.env
+*.env
+*.cache
