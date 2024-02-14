@@ -21,6 +21,22 @@ https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/202
 
 ## HOMEWORK:
 SQL: 
-```sql 
-   SELECT * FROM ...
+```sql
+-- Create external table refering to GCS
+CREATE OR REPLACE EXTERNAL TABLE `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record`
+OPTIONS (
+format = 'PARQUET',
+uris = ['gs://my-zoomcamp-bucket-1/03_homework.parquet']
+);
+
+-- Check data
+SELECT PULocationID FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record`; 
+
+-- Task #3: How many records have a fare_amount of 0?
+SELECT * FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record` WHERE `fare_amount` = 0; 
+
+
+-- Create a non partitioned table from external table
+CREATE OR REPLACE TABLE `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record__non_partitoned` AS
+SELECT * FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record`
 ```
