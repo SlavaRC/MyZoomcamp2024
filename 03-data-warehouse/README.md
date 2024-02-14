@@ -38,5 +38,24 @@ SELECT * FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_recor
 
 -- Create a non partitioned table from external table
 CREATE OR REPLACE TABLE `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record__non_partitoned` AS
-SELECT * FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record`
+SELECT * FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record`;
+
+-- Create Table with "cleaned_dropoff_datetime" column of timestamp type. Workaround to do Task #5
+CREATE OR REPLACE TABLE `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record_timestamp` AS 
+SELECT *, TIMESTAMP_MICROS(CAST(lpep_pickup_datetime / 1000 AS INT64)) AS cleaned_pickup_datetime, TIMESTAMP_MICROS(CAST(lpep_dropoff_datetime / 1000 AS INT64)) AS cleaned_dropoff_datetime FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record`;
+
+--create a partition and cluster
+CREATE OR REPLACE TABLE `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record__partitoned`
+  PARTITION BY DATE(cleaned_pickup_datetime)
+  CLUSTER BY PUlocationID AS
+SELECT *, FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record_timestamp`;
+
+-- Write a query to retrieve the distinct PULocationID between lpep_pickup_datetime 06/01/2022 and 06/30/2022 (inclusive)
+-- Use the materialized table you created earlier in your from clause and note the estimated bytes. 
+-- Now change the table in the from clause to the partitioned table you created for question 4 and note the estimated bytes processed. -- What are these values?
+SELECT count(DISTINCT PULocationID) FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record__partitoned` 
+WHERE cleaned_pickup_datetime BETWEEN "2022-06-01" and "2022-06-30"; --1,12MB
+SELECT count(DISTINCT PULocationID) FROM `my-zoomcamp-project-1.03_homework_dataset_1.green_taxi_trip_record_timestamp` 
+WHERE cleaned_pickup_datetime BETWEEN "2022-06-01" and "2022-06-30"; --12,82MB
+
 ```
