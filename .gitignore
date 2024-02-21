@@ -42,3 +42,4 @@ Thumbs.db
 /pg_volume_local_data/
 *.env
 *.cache
+*.operation_history/
